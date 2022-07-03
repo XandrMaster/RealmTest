@@ -1,12 +1,15 @@
 plugins {
     kotlin("multiplatform")
+    kotlin("native.cocoapods")
     id("com.android.library")
-    id("io.realm.kotlin") version "0.9.0"
+    id("io.realm.kotlin")
 }
+
+version = "1.0"
 
 kotlin {
     android()
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -20,12 +23,19 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("io.realm.kotlin:library-base:0.9.0")
+                implementation("io.realm.kotlin:library-base:1.0.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-native-mt")
             }
         }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
+                implementation(kotlin("test-annotations-common"))
+
+                implementation("org.jetbrains.kotlin:kotlin-test-common:1.7.0")
+                implementation("org.jetbrains.kotlin:kotlin-test-annotations-common:1.7.0")
+
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0-native-mt")
             }
         }
         val androidMain by getting
