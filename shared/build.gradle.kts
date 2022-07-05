@@ -38,8 +38,8 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0-native-mt")
             }
         }
-        val androidMain by getting
-        val androidTest by getting
+//        val androidMain by getting
+//        val androidTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
@@ -57,6 +57,16 @@ kotlin {
             iosX64Test.dependsOn(this)
             iosArm64Test.dependsOn(this)
             iosSimulatorArm64Test.dependsOn(this)
+        }
+        getByName("androidMain") {
+            kotlin.srcDir("src/androidMain/kotlin")
+        }
+        getByName("androidTest") {
+            dependencies {
+                implementation(kotlin("test"))
+                implementation(kotlin("test-junit"))
+                implementation("junit:junit:4.13.2")
+            }
         }
     }
 }
