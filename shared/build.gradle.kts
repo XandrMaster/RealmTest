@@ -23,7 +23,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("io.realm.kotlin:library-base:1.0.0")
+                implementation("io.realm.kotlin:library-base:1.0.1")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-native-mt")
             }
         }
@@ -73,9 +73,26 @@ kotlin {
 
 android {
     compileSdk = 31
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+//    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
         minSdk = 21
         targetSdk = 31
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        sourceSets {
+            getByName("main") {
+                manifest.srcFile("src/androidMain/AndroidManifest.xml")
+                getByName("androidTest") {
+                    java.srcDirs("src/androidTest/kotlin")
+                }
+            }
+        }
+    }
+
+    dependencies {
+        testImplementation("junit:junit:4.13.2")
+        androidTestImplementation("androidx.test.ext:junit:1.1.3")
+        androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
     }
 }
