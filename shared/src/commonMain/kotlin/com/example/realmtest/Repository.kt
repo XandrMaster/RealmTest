@@ -12,7 +12,7 @@ class Repository(name: String = "compendium") {
 //    ).build()
 	val config = RealmConfiguration
 		.Builder(setOf(Book::class))
-		.schemaVersion(2)
+		.schemaVersion(3)
 		.build()
 	val realm: Realm = Realm.open(config)
 
